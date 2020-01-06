@@ -1,0 +1,33 @@
+<div>
+  <h2 align="center">Table with JSON data</h2>
+  <div class="col-sm-5" style="padding-top: 20px;padding-bottom: 20px;">
+    <ion-searchbar type="text" placeholder="Search........." [(ngModel)]="filter" showCancelButton="always"></ion-searchbar>
+  </div>
+  <ion-grid class="ion-padding">
+      <ion-row class="ion-padding">
+        <ion-col>S.No.</ion-col>
+        <ion-col style="margin: 20px;">Person_ID</ion-col>
+        <ion-col style="margin:45px;">Name</ion-col>
+        <ion-col style="margin:20px">Course_Id</ion-col>
+        <ion-col style="margin:30px;">Course_Title</ion-col>
+        <ion-col style="margin:30px;">CreatedAt</ion-col>
+        <ion-col style="margin:150px;">Actions</ion-col>
+      </ion-row>
+      <ion-row  class="ion-padding" *ngFor="let rec of allLibb | async| filter:filter| paginate: { itemsPerPage:5, currentPage: p}">
+        <ion-col style="margin:20px;"><ion-label>{{rec.id}}</ion-label></ion-col>
+        <ion-col style="margin:60px;"><ion-label>{{rec.Person_Id}}</ion-label></ion-col>
+        <ion-col style="margin:25px;"><ion-label>{{rec.Name}}</ion-label></ion-col>
+        <ion-col style="margin:40px;"><ion-label>{{rec.Course_Id}}</ion-label></ion-col>
+        <ion-col style="margin:30px;"><ion-label>{{rec.Course_Title}}</ion-label></ion-col>
+        <ion-col style="margin:10px"><ion-label>{{rec.Created_At}}</ion-label></ion-col>
+        <ion-col style="margin:60px;">
+          <ion-button color="danger" (click)="deleteData(rec.id)">
+            <ion-icon name="trash"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <pagination-controls (pageChange)="p=$event"></pagination-controls>
+      </ion-row>
+  </ion-grid>
+</div>
